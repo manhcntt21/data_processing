@@ -2,43 +2,33 @@
 
 # -*- coding: utf8 -*-
 from sklearn.utils import shuffle
-from preprocessing import get_original_data, convert, split_train_test, split_token_json, add_noise_sequen, merge_data_noise, read_data_ducanh
+from preprocessing import get_original_data, convert, split_token_json, add_noise_sequen, merge_data_noise, read_data_ducanh
 from utils import filter_punctuation, test_length
 import random
 random.seed(3255)
 path = './data111/'
 file = 'data_.jsonl'
-data_label = ["BOOK", "CALS", "DIAL", "NEWS", "STORS", "DIAL2"]
+data_labels = ["BOOK", "CALS", "DIAL", "NEWS", "STORS", "DIAL2"]
 final_json = ['train_data.json', 'test_data.json']
 file_ducanh = ['./data_cuong/2016/train2016-refine.txt',
                './data_cuong/2018/train2018-refine.txt']
 
-
-def data_add_noise(data_element, fff_file):
-    data_element = split_token_json(data_element)
-    data_element = add_noise_sequen(data_element, fff_file)  # add_noise
-    data_element = shuffle(data_element)  # shuffle data
-    return data_element
-
-
-def result():
-    fff_file = open("text.txt", "w+")
-    data = []
-    for i in range(len(data_label)):
-        data_element = convert(file, data_label[i])
-        data_element = data_add_noise(data_element, fff_file)
-        data += data_element
-    # xử lý riêng với dữ liệu của đức anh, không cần phải lọc theo item vì có một loại
-    data_ducanh = []
-    data_ducanh = read_data_ducanh(file_ducanh)
-    data_ducanh = add_noise_sequen(data_ducanh, fff_file)  # add_noise
-    data_ducanh = shuffle(data_ducanh)  # shuffle data
-    merge_data_noise(data, data_ducanh, path, final_json)
-
+# xử lý riêng với dữ liệu của đức anh, không cần phải lọc theo item vì có một loại
+def custom_data(f):
+    tokenize_data = read_data_ducanh(file_ducanh)
+    noisy_data = add_noise_sequen(tokenize_data, f)  # add_noise
+    data = shuffle(noisy_data)  # shuffle data
+    return data
 
 if __name__ == '__main__':
-    result()
-    # test_length(path,'train_data.json')
-    # test_length(path,'test_data.json')
-    # test_length(path,'test_data.json', 'test_data.json')
-    # create_tiny()
+    f = open("text.txt", "w+")
+    data = []
+    for i in range(len(data_labels)):
+        raw_data = convert(file, data_labels[i])
+        tokenize_data = split_token_json(raw_data)
+        noisy_data = add_noise_sequen(tokenize_data, f)  # add_noise
+        data_element = shuffle(noisy_data)  # shuffle data
+        data += data_element
+    data_ducanh = custom_data(f)
+    # trộn 2 loại data và ghi vào file: final_json 
+    merge_data_noise(data, data_ducanh, path, final_json)

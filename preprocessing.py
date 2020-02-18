@@ -60,13 +60,6 @@ def convert(fil, data_label):
             data_element.append(element)
     return data_element
 
-def split_train_test(data):
-    """
-            tach ra train vs test theo ti le 8 :2
-    """
-    train, test = train_test_split(data, test_size=0.2, random_state=3255)
-    return train, test
-
 def split_token_json(data):
     """  
         Từ dữ liệu ban đầu, tiến hành đọc dữ liệu và tokienize thành các từ
@@ -107,7 +100,7 @@ def select_word(tmp, mark_sequen):
         word = tmp['original'][n]
     return n, word, mark_sequen
 
-def add_noise_sequen(data1, fff_file):
+def add_noise_sequen(data1, f):
     """
         lấy 70 phần trăm dữ liệu để tạo thêm 
         môi câu được chọn sẽ chọn số lượng lỗi bằng 30% chiều dài câu (một từ không được chọn lại) -- chính là số từ bị lỗi 
@@ -160,7 +153,7 @@ def add_noise_sequen(data1, fff_file):
                                 word = add_noise(word, op)
                                 file_word2 = copy.copy(word)
                             file_errorr[op] = file_errorr[op] + 1
-                            fff_file.write('%-15s  <%-2d>  %-15s\n' %
+                            f.write('%-15s  <%-2d>  %-15s\n' %
                                         (file_word1, op, file_word2))
                             tmp['raw'][n] = word
                             data2.append(tmp)
@@ -501,7 +494,6 @@ def read_file_ducanh(file, label):
                 count +=1
     return data 
 
-
 def read_data_ducanh(file_ducanh):
     """
         thêm dữ liệu của dức anh từ 2 file 
@@ -513,21 +505,17 @@ def read_data_ducanh(file_ducanh):
     data = data1 + data2
     return data
 
-
 def merge_data_noise(data, data_ducanh, path,final_json):
     """
         data được chia theo tỉ lệ 8:2 
         và ghi ra file 'train_data.json', 'test_data.json' để dùng cho model 
     """
-
-    total_train, total_test = split_train_test(data)
-
-    print('tong tat ca du lieu1 {}'.format(len(total_train)+len(total_test)))
-
-    train, test = split_train_test(data_ducanh)
+    total_train, total_test = train_test_split(data, test_size=0.2, random_state=3255)
+    print('tong tat ca du lieu anh minh  {}'.format(len(total_train)+len(total_test)))
+    train, test = train_test_split(data_ducanh, test_size=0.2, random_state=3255)
     total_train = total_train + train
     total_test = total_test + test
-    print('tong tat ca du lieu2 {}'.format(len(total_train)+len(total_test)))
+    print('tong tat ca du lieu cua anh minh va duc anh  {}'.format(len(total_train)+len(total_test)))
     # ghi vao file train va test o dang list de dua vao model
     with open(path+final_json[0], 'w') as outfile:
         json.dump(total_train, outfile, ensure_ascii=False)

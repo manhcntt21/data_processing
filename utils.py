@@ -3,16 +3,7 @@ import json
 
 def filter_punctuation(my_str):
     """
-        chi nhung tu nay moi can loc
-        regex2  = re.compile(
-            '^[aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz0123456789_]+$',re.UNICODE)
-    j = 0
-    for i in b:
-                if re.search(regex2,i):
-                # print(add_noise(i,0))
-                j+=1
-                sau khi tokenzier thi loc
-
+        thêm @ vào các dấu câu 
     """
     punctuations = r'''!()-[]{};:'"\,<>./?@#$%^&*~'''
     no_punct = ""
@@ -23,22 +14,12 @@ def filter_punctuation(my_str):
             no_punct = no_punct + ' @' + char
     return no_punct
 
-def filter_number(data):
-    """
-        thêm @ vào các phần tử chứa số trong raw và original
-        nếu một từ có cả dấu câu và số thì sẽ có 2 chữ @ 
-    """
-    regex1 = re.compile(r"\S*\d+\S*", re.UNICODE)
-    for i in range(len(data)):
-        for j, k in enumerate(data[i]['original']):
-            if re.search(regex1, k):
-                data[i]['raw'][j] = '@' + data[i]['raw'][j]
-                data[i]['original'][j] = '@' + data[i]['original'][j]
-
-    return data
-
 def test_length(path, f1):
-    # test length cau
+    """
+        tính chiều dài của câu và chiều dài của từ , từ file
+
+        cần phải công thêm 2 vì khi áp dung vào mô hình cần bổ sung thêm 2 kí tự bắt đầu và kết thúc 
+    """
     with open(path+f1, 'r') as json_data:
         data = json.load(json_data)
     max_ = 0
@@ -47,9 +28,6 @@ def test_length(path, f1):
             max_ = len(i['original'])
     print(max_)
     print('len cau', len(data))
-    # 68 + 2 = 70
-    # 65 + 2 = 67 =>>>>>>>69
-    # test length tu
 
     max_ = 0
     for i in data:
@@ -65,5 +43,7 @@ def test_length(path, f1):
                 # print(i['id'])
     print(max_)
     print('len word ', len(data))
-    # 47 + 4 =
-    # 23 + 4 = 25  ========>
+
+if __name__ == '__main__':
+    test_length(path,'train_data.json')
+    test_length(path,'test_data.json')
