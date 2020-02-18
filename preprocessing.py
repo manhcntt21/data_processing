@@ -9,7 +9,8 @@ import re
 import numpy as np
 import string 
 
-# data_goc
+percentage_of_sentence = 30 # số lượng noise dao động trong một câu, từ 0 đến 30% theo chiều dài của câu 
+number_of_data = 0.7 # số lượng dữ liệu làm nhiều -  tính theo phần trăm  
 # data_original => get_original_data
 def get_original_data(file, path):
     """
@@ -123,14 +124,14 @@ def add_noise_sequen(data1, f):
     for i in range(26):
         file_errorr.append(0)
     random.seed(3255)
-    element_random = random.sample(range(len(data1)), int(0.7*len(data1)))
+    element_random = random.sample(range(len(data1)), int(number_of_data*len(data1)))
     for i in range(len(data1)):
         i1 = i
         if i1 in element_random:  # xác suất chọn câu để thêm nhiễu 
             n_quence = random.choice(sequence)
             mark_sequen = [0]*len(data1[i]['original'])
             for j in range(n_quence - 1):
-                n_error = (random.randint(0, 30)*len(data1[i]['original']))/100 # nếu câu quá ngắn thì sẽ không tạo ra câu nào, do giá trị n_erorr = 0
+                n_error = (random.randint(0, percentage_of_sentence)*len(data1[i]['original']))/100 # nếu câu quá ngắn thì sẽ không tạo ra câu nào, do giá trị n_erorr = 0
                 tmp = copy.deepcopy(data1[i])
                 tmp['id'] = tmp['id'] + str(j)
                 # do câu quá ngắn nên sẽ sét mặc đinh là có một lỗi 
@@ -521,4 +522,3 @@ def merge_data_noise(data, data_ducanh, path,final_json):
         json.dump(total_train, outfile, ensure_ascii=False)
     with open(path+final_json[1], 'w') as outfile:
         json.dump(total_test, outfile, ensure_ascii=False)
-
