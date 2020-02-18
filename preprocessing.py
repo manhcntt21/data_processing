@@ -482,9 +482,9 @@ def add_noise(word, op):
     else:
         return word
 
-def read_data_ducanh(file_ducanh):
-    data1 = []
-    with open(file_ducanh[0], 'r') as json_data:
+def read_file_ducanh(file, label):
+    data = []
+    with open(file, 'r') as json_data:
             tmp = json_data.readlines()
             count = 0
             for line in tmp:
@@ -496,26 +496,22 @@ def read_data_ducanh(file_ducanh):
                 json_data['original'] = copy.copy(y1)
                 json_data['raw'] = copy.copy(y1)
                 json_data.update({'tid' : 0})
-                json_data.update({'id' : 'DUCANH1'+str(count)})
-                data1.append(json_data)
+                json_data.update({'id' : label+ str(count)})
+                data.append(json_data)
                 count +=1
+    return data 
 
-    with open(file_ducanh[1], 'r') as json_data:
-            tmp = json_data.readlines()
-            count = 0
-            for line in tmp:
-                json_data = {}
-                x1 = copy.copy(line)
-                y1 = ViTokenizer.tokenize(x1)
-                y1 = filter_punctuation(y1)
-                y1 = y1.split(" ")
-                json_data['original'] = copy.copy(y1)
-                json_data['raw'] = copy.copy(y1)
-                json_data.update({'tid' : 0})
-                json_data.update({'id' : 'DUCANH2'+str(count)})
-                data1.append(json_data)
-                count +=1
-    return data1
+
+def read_data_ducanh(file_ducanh):
+    """
+        thêm dữ liệu của dức anh từ 2 file 
+    """
+
+    data = []
+    data1 =  read_file_ducanh(file_ducanh[0], 'DUCANH1')
+    data2 =  read_file_ducanh(file_ducanh[1], 'DUCANH2')
+    data = data1 + data2
+    return data
 
 
 def merge_data_noise(data, data_ducanh, path,final_json):
@@ -538,4 +534,6 @@ def merge_data_noise(data, data_ducanh, path,final_json):
     with open(path+final_json[1], 'w') as outfile:
         json.dump(total_test, outfile, ensure_ascii=False)
 
-
+if __name__ == '__main__':
+    file_ducanh = ['./data_cuong/2016/train2016-refine.txt', './data_cuong/2018/train2018-refine.txt']
+    data1 =  read_file_ducanh(file_ducanh[0], 'DUCANH1')
