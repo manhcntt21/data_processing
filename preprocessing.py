@@ -1,11 +1,11 @@
 from pyvi import ViTokenizer
 from utils import filter_punctuation
+from sklearn.model_selection import train_test_split
+from rule_noise import *
 import copy
 import json
-from sklearn.model_selection import train_test_split
 import random
 import re
-from rule_noise import *
 import numpy as np
 import string 
 
@@ -534,6 +534,3 @@ def merge_data_noise(data, data_ducanh, path,final_json):
     with open(path+final_json[1], 'w') as outfile:
         json.dump(total_test, outfile, ensure_ascii=False)
 
-if __name__ == '__main__':
-    file_ducanh = ['./data_cuong/2016/train2016-refine.txt', './data_cuong/2018/train2018-refine.txt']
-    data1 =  read_file_ducanh(file_ducanh[0], 'DUCANH1')

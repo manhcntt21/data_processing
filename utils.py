@@ -1,7 +1,6 @@
 import re
 import json
 
-
 def filter_punctuation(my_str):
     """
         chi nhung tu nay moi can loc
