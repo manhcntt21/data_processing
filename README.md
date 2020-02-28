@@ -27,7 +27,7 @@
         - [31, 21, 15, 7, 7, 10, 12, 0, 11, 0, 7, 0, 26]
         - tổng dữ liệu noise tạo ra 147
         - tổng dữ liệu 323
--Dữ liệu DIAL
+- Dữ liệu DIAL
     - -----------------TRAIN-----------------------
         - lượng dữ liệu ban đầu 3494
         - thông kê các loại lỗi trong dữ liệu
@@ -39,7 +39,7 @@
         - thông kê các loại lỗi trong dữ liệu
         - [201, 154, 132, 21, 46, 100, 77, 15, 53, 3, 24, 2, 210]
         - tổng dữ liệu noise tạo ra 1038
--         - tổng dữ liệu 1912
+        - tổng dữ liệu 1912
 - Dữ liệu NEWS
     - -----------------TRAIN-----------------------
         - lượng dữ liệu ban đầu 4634
