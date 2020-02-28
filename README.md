@@ -1,6 +1,6 @@
 # ./data_8_2/
-**Kích thước dữ liệu gốc của anh Minh 17248**
-**Kích thước dữ liệu gốc của Đức Anh 32443**
+* **Kích thước dữ liệu gốc của anh Minh 17248**
+* **Kích thước dữ liệu gốc của Đức Anh 32443**
 - Dữ liệu BOOK
     - -----------------TRAIN-----------------------
         - lượng dữ liệu ban đầu 515
@@ -94,8 +94,8 @@
         - tổng dữ liệu 16966
 ## tổng dữ liệu của anh Minh và Đức Anh  128072
 # ./data_9_1/
-**Kích thước dữ liệu gốc của anh Minh 17248**
-**Kích thước dữ liệu gốc của Đức Anh 32443**
+* **Kích thước dữ liệu gốc của anh Minh 17248**
+* **Kích thước dữ liệu gốc của Đức Anh 32443**
 - Dữ liệu BOOK
     - -----------------TRAIN-----------------------
         - lượng dữ liệu ban đầu 579
