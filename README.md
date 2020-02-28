@@ -1,4 +1,4 @@
-#./data_8_2/
+# ./data_8_2/
 **Kích thước dữ liệu gốc của anh Minh 17248**
 **Kích thước dữ liệu gốc của Đức Anh 32443**
 - Dữ liệu BOOK
