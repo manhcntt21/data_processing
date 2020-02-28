@@ -1,7 +1,7 @@
 from pyvi import ViTokenizer
 from utils import filter_punctuation
-from sklearn.model_selection import train_test_split
 from rule_noise import *
+from sklearn.utils import shuffle
 import copy
 import json
 import random
@@ -9,41 +9,29 @@ import re
 import numpy as np
 import string 
 
+
 percentage_of_sentence = 30 # số lượng noise dao động trong một câu, từ 0 đến 30% theo chiều dài của câu 
 number_of_data = 0.7 # số lượng dữ liệu làm nhiều -  tính theo phần trăm  
 # data_original => get_original_data
-def get_original_data(file, path):
+def get_data_book(file, path = None):
     """
-        ham nay chi doc du lieu anh minh gui
-        data1 - len raw va original = nhau
-        data2 - len raw va original khac nhau
+
     """
-    data1 = []
-    data2 = []
+    data = []
     with open(file, 'r') as json_data:
         for f in json_data:
             tmp = json.loads(f)  
-            x = copy.copy(tmp['raw'])
-            y = ViTokenizer.tokenize(x)
-            y = filter_punctuation(y)  # loc dau cau
-            y = y.split(" ")
-            tmp['raw'] = copy.copy(y)
             x1 = copy.copy(tmp['original'])
             y1 = ViTokenizer.tokenize(x1)
             y1 = filter_punctuation(y1)  # loc dau cau
             y1 = y1.split(" ")
             tmp['original'] = copy.copy(y1)
+            tmp['raw'] = copy.copy(y1)
             tmp.update({'tid': 0})
-            if len(y) == len(y1):
-                data1.append(tmp)
-            else:
-                data2.append(tmp)
-    with open(path+'data_original.json', 'w') as outfile:
-        json.dump(data1, outfile, ensure_ascii=False)
-        
-    print(len(data1))
-
-    print(len(data1) + len(data2))
+            data.append(tmp)
+    # with open(path+'data_original.json', 'w') as outfile:
+    #     json.dump(data1, outfile, ensure_ascii=False)
+    return data    
 
 def convert(fil, data_label):
     """
@@ -108,11 +96,11 @@ def add_noise_sequen(data1, f):
         vẫn giữ cả câu ban đầu 
         data1 - dữ liệu ban đầu
         data2 - dữ liệu tạo ra 
-        fff-file - lưu các từ được tạo ra file 
+        f - lưu các từ được tạo ra file 
         sau đó trộn data2 vào data1 
     """
     
-    print('len data ban dau {}'.format(len(data1)))
+    print('lượng dữ liệu ban đầu {}'.format(len(data1)))
     data2 = []  # noise tao ra
     regex1 = re.compile(r"\S*\d+\S*", re.UNICODE) # lọc số 
     regex2 = re.compile(
@@ -120,9 +108,13 @@ def add_noise_sequen(data1, f):
     error = np.arange(26)
     sequence = [1, 2, 3]
     # dem so loi
-    file_errorr = []
+    element_erorr = []
     for i in range(26):
-        file_errorr.append(0)
+        element_erorr.append(0)
+    # gộp các loại lỗi lại
+    final_erorr = []
+    for i in range(13):
+        final_erorr.append(0)
     random.seed(3255)
     element_random = random.sample(range(len(data1)), int(number_of_data*len(data1)))
     for i in range(len(data1)):
@@ -153,16 +145,22 @@ def add_noise_sequen(data1, f):
                                 op = random.choice(error)
                                 word = add_noise(word, op)
                                 file_word2 = copy.copy(word)
-                            file_errorr[op] = file_errorr[op] + 1
-                            f.write('%-15s  <%-2d>  %-15s\n' %
-                                        (file_word1, op, file_word2))
+                            element_erorr[op] = element_erorr[op] + 1
+                            try:
+                                f.write('%-15s  <%-2d>  %-15s\n' %
+                                            (file_word1, op, file_word2))
+                            except:
+                                pass                 
                             tmp['raw'][n] = word
                             data2.append(tmp)
     # thong ke cac loi khi them                
-    print(file_errorr)  
-    print('length data noise tao ra {}'.format(len(data2)))
+    final_erorr = get_statistical_erorr(final_erorr, element_erorr)
+    print('thông kê các loại lỗi trong dữ liệu')
+    print(final_erorr)
+
+    print('tổng dữ liệu noise tạo ra {}'.format(len(data2)))
     data1 = data1 + data2 
-    print('sum data {}'.format(len(data1)))
+    print('tổng dữ liệu {}'.format(len(data1)))
     return data1
 
 def add_noise(word, op):
@@ -188,12 +186,10 @@ def add_noise(word, op):
           
     --------6. tương tự noise vni
     --------7. lập lại một số lần từ 1 - 5 các nguyên âm ouieay mà nó không dứng ở đầu 
-    --------8. cac am vi o dau cua am tiet gan giong nhau
     --------8. 17. 18 các âm vị gần giống nhau ở đầu của âm tiết 
     --------9. 19.20 các âm vị ở cuối gần giống nhau của âm tiết, theo saigon 
     --------10 , 21  thay đổi dấu ngã và hỏi đối với các nguyên âm 
     --------11 , 22, 23 các âm vị ở đầu có cách phát âm giống nhau trong một số trường hợp ví dụ: c,q,k
-    --------12, 24, 25 sai vi tri dau va thay doi chu cai voi to hop cac dau neu am tiet co 1 nguyen am
     --------12, 24, 25 sai vị trí dấu
         có 2 trường hợp :  <> nếu âm tiết chỉ có một nguyên âm, thì sẽ đối ngẫu nhiên các trường hợp được ghi trong
         get_change_sign
@@ -497,7 +493,7 @@ def read_file_ducanh(file, label):
 
 def read_data_ducanh(file_ducanh):
     """
-        thêm dữ liệu của dức anh từ 2 file 
+        đọc dữ liệu của dức anh từ 2 file 
     """
 
     data = []
@@ -506,19 +502,59 @@ def read_data_ducanh(file_ducanh):
     data = data1 + data2
     return data
 
-def merge_data_noise(data, data_ducanh, path,final_json):
+def merge_data_noise(train, test, path,final_json):
     """
-        data được chia theo tỉ lệ 8:2 
-        và ghi ra file 'train_data.json', 'test_data.json' để dùng cho model 
+        chỉ việc ghi dữ liệu train, test ra file 
     """
-    total_train, total_test = train_test_split(data, test_size=0.2, random_state=3255)
-    print('tong tat ca du lieu anh minh  {}'.format(len(total_train)+len(total_test)))
-    train, test = train_test_split(data_ducanh, test_size=0.2, random_state=3255)
-    total_train = total_train + train
-    total_test = total_test + test
-    print('tong tat ca du lieu cua anh minh va duc anh  {}'.format(len(total_train)+len(total_test)))
+    # total_train, total_test = train_test_split(data, test_size=0.2, random_state=3255)
+    # print('tổng dữ liệu của anh Minh  {}'.format(len(total_train)+len(total_test)))
+    # train, test = train_test_split(data_ducanh, test_size=0.2, random_state=3255)
+    # total_train = total_train + train
+    # total_test = total_test + test
+    print('tổng dữ liệu của anh Minh và Đức Anh  {}'.format(len(train)+len(test)))
     # ghi vao file train va test o dang list de dua vao model
     with open(path+final_json[0], 'w') as outfile:
-        json.dump(total_train, outfile, ensure_ascii=False)
+        json.dump(train, outfile, ensure_ascii=False)
     with open(path+final_json[1], 'w') as outfile:
-        json.dump(total_test, outfile, ensure_ascii=False)
+        json.dump(test, outfile, ensure_ascii=False)
+
+def get_statistical_erorr(final_erorr, erorr):
+    final_erorr[0] = erorr[0] + erorr[13]
+    final_erorr[1] = erorr[1] + erorr[14]
+    final_erorr[2] = erorr[2] + erorr[15]
+    final_erorr[3] = erorr[3] + erorr[16]
+    final_erorr[4] = erorr[4]
+    final_erorr[5] = erorr[5]
+    final_erorr[6] = erorr[6]
+    final_erorr[7] = erorr[7]
+    final_erorr[8] = erorr[8] + erorr[17] + erorr[18]
+    final_erorr[9] = erorr[9] + erorr[19] + erorr[20]
+    final_erorr[10] = erorr[10] + erorr[21]
+    final_erorr[11] = erorr[11] + erorr[22] + erorr[23]
+    final_erorr[12] = erorr[12] + erorr[24] + erorr[25]
+    return final_erorr
+
+def get_length_data_json(fil):
+    '''
+     trả về kích thức dữ liệu gốc của anh Minh
+    '''
+    data = []
+    with open(fil, 'r') as json_data:
+        for element in json_data:
+            data.append(json.loads(element))
+    return len(data)
+
+def get_length_data_add(file_ducanh):
+    """
+        trả về kích thước dữ liệu gốc của Đức Anh 
+    """
+    data = read_data_ducanh(file_ducanh)
+    return len(data)
+if __name__ == "__main__":
+    f = None
+    path = './data_test/'
+    tokenize_data = get_data_book(path + 'test_book.json')
+    noise_data = add_noise_sequen(tokenize_data, f)
+    data = shuffle(noise_data)
+    with open(path+'test_book1.json', 'w') as outfile:
+        json.dump(data, outfile, ensure_ascii=False)

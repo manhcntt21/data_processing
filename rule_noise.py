@@ -1,6 +1,5 @@
 import copy
 
-
 def get_change_sign(word):
     """
         # sign['a'] =  # a à á â ã ạ ả ấ  ầ  ậ ắ  ặ

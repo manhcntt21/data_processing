@@ -44,6 +44,13 @@ def test_length(path, f1):
     print(max_)
     print('len word ', len(data))
 
+
+
 if __name__ == '__main__':
-    test_length(path,'train_data.json')
-    test_length(path,'test_data.json')
+    # test_length(path,'train_data.json')
+    # test_length(path,'test_data.json')
+    # get_length_data_json('data_.jsonl')
+    # file_ducanh = ['./data_cuong/2016/train2016-refine.txt',
+    #            './data_cuong/2018/train2018-refine.txt']
+    # get_length_data_add(file_ducanh)
+    pass
