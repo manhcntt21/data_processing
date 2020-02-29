@@ -23,7 +23,7 @@ def get_data_book(file, path = None):
             tmp = json.loads(f)  
             x1 = copy.copy(tmp['original'])
             y1 = ViTokenizer.tokenize(x1)
-            y1 = filter_punctuation(y1)  # loc dau cau
+            # y1 = filter_punctuation(y1)  # loc dau cau
             y1 = y1.split(" ")
             tmp['original'] = copy.copy(y1)
             tmp['raw'] = copy.copy(y1)
@@ -65,7 +65,7 @@ def split_token_json(data):
     for i in range(len(data)):
         x1 = copy.copy(data[i]['original'])
         y1 = ViTokenizer.tokenize(x1)
-        y1 = filter_punctuation(y1)  # loc dau cau
+        # y1 = filter_punctuation(y1)  # loc dau cau
         y1 = y1.split(" ")
         data[i]['original'] = copy.copy(y1)
         data[i]['raw'] = copy.copy(y1)
@@ -100,7 +100,7 @@ def add_noise_sequen(data1, f):
         sau đó trộn data2 vào data1 
     """
     
-    print('lượng dữ liệu ban đầu {}'.format(len(data1)))
+    print('\t\t- lượng dữ liệu ban đầu {}'.format(len(data1)))
     data2 = []  # noise tao ra
     regex1 = re.compile(r"\S*\d+\S*", re.UNICODE) # lọc số 
     regex2 = re.compile(
@@ -120,17 +120,22 @@ def add_noise_sequen(data1, f):
     for i in range(len(data1)):
         i1 = i
         if i1 in element_random:  # xác suất chọn câu để thêm nhiễu 
-            n_quence = random.choice(sequence)
+            n_quence = random.choice(sequence) # sinh thêm 1 hoặc 2 hoặc 3 câu từ câu đã chọn
             mark_sequen = [0]*len(data1[i]['original'])
-            for j in range(n_quence - 1):
+            for j in range(n_quence): # id của các câu tạo thêm sẽ được bổ sung thêm 0 1 2
                 n_error = (random.randint(0, percentage_of_sentence)*len(data1[i]['original']))/100 # nếu câu quá ngắn thì sẽ không tạo ra câu nào, do giá trị n_erorr = 0
+                tmp = {}
                 tmp = copy.deepcopy(data1[i])
-                tmp['id'] = tmp['id'] + str(j)
                 # do câu quá ngắn nên sẽ sét mặc đinh là có một lỗi 
                 if int(n_error) == 0: 
                     n_error = 1
                 # nếu câu có 1 từ mà cần tạo thêm 2 câu thì khi chạy sẽ bị lỗi do không tim được từ nào khác từ trước 
-                if len(tmp['original']) > 1: 
+                
+                # câu quá ngắn có từ kèm theo 1 dấu câu, khi tách từ thì cậu có độ dài bằng 2, thì chỉ có thể tạo thêm được 1 câu thôi.
+                # vì từ kia đã được làm lỗi rồi 
+                # chưa tìm ra cách đểm các phần tử thật sư là từ trong một câu, vì một từ có dấu _ ở giữa các âm tiết, mà trong khi tách từ cũng có thể  tạo 
+                # các phần tử là dấu cách, tạm thời dùng điều kiện ở dưới 
+                if len(tmp['original']) > 2: 
                     for j1 in range(int(n_error)):
                         # chọn ngẫu nhiên vị trí một từ 
                         n, word, mark_sequen = select_word(tmp, mark_sequen)
@@ -147,20 +152,27 @@ def add_noise_sequen(data1, f):
                                 file_word2 = copy.copy(word)
                             element_erorr[op] = element_erorr[op] + 1
                             try:
-                                f.write('%-15s  <%-2d>  %-15s\n' %
-                                            (file_word1, op, file_word2))
+                                f.write('%-15s  <%-2d>  %-15s\n' %(file_word1, op, file_word2))
                             except:
                                 pass                 
                             tmp['raw'][n] = word
-                            data2.append(tmp)
+
+                # nếu sau khi thử hết các trường hợp mà câu đó không tạo thêm từ mới thì bỏ 
+                # chẳng hạn nếu câu có 1 từ nhưng lại được tạo thêm 2 câu thì không thể, vì một từ chỉ có một lỗi  
+                # elif sum(mark_sequen) == len(tmp['original']):
+                #     break
+
+                if tmp != data1[i1]:
+                    tmp['id'] = tmp['id'] + 'MANH' + str(j) 
+                    data2.append(tmp)
+
     # thong ke cac loi khi them                
     final_erorr = get_statistical_erorr(final_erorr, element_erorr)
-    print('thông kê các loại lỗi trong dữ liệu')
-    print(final_erorr)
-
-    print('tổng dữ liệu noise tạo ra {}'.format(len(data2)))
+    print('\t\t- thông kê các loại lỗi trong dữ liệu')
+    print('\t\t- {}'.format(final_erorr))
+    print('\t\t- tổng dữ liệu noise tạo ra {}'.format(len(data2)))
     data1 = data1 + data2 
-    print('tổng dữ liệu {}'.format(len(data1)))
+    print('\t\t- tổng dữ liệu {}'.format(len(data1)))
     return data1
 
 def add_noise(word, op):
@@ -481,14 +493,14 @@ def read_file_ducanh(file, label):
                 json_data = {}
                 x1 = copy.copy(line)
                 y1 = ViTokenizer.tokenize(x1)
-                y1 = filter_punctuation(y1)
+                # y1 = filter_punctuation(y1)
                 y1 = y1.split(" ")
                 json_data['original'] = copy.copy(y1)
                 json_data['raw'] = copy.copy(y1)
                 json_data.update({'tid' : 0})
                 json_data.update({'id' : label+ str(count)})
                 data.append(json_data)
-                count +=1
+                count +=1 
     return data 
 
 def read_data_ducanh(file_ducanh):
@@ -497,8 +509,8 @@ def read_data_ducanh(file_ducanh):
     """
 
     data = []
-    data1 =  read_file_ducanh(file_ducanh[0], 'DUCANH1')
-    data2 =  read_file_ducanh(file_ducanh[1], 'DUCANH2')
+    data1 =  read_file_ducanh(file_ducanh[0], 'DUCANH_')
+    data2 =  read_file_ducanh(file_ducanh[1], 'DUCANH__')
     data = data1 + data2
     return data
 
@@ -550,11 +562,58 @@ def get_length_data_add(file_ducanh):
     """
     data = read_data_ducanh(file_ducanh)
     return len(data)
+
+import collections
+def random_numbers_sequence(path):
+    # đọc dữ liệu 
+    with open(path) as f:
+        data = json.load(f)
+    # sampling = random.choices(data, k = 1000)
+    # for i in sampling:
+    #     j3 = 0
+    #     for j1 in i['original']:
+    #         for k1 in j1: 
+    #             if k1 in string.punctuation and k1 != '_' :
+    #                 print('{:<10}:  {:<20}  {:<20}'.format(j3, i['id'],j1))
+    #                 break
+    #         j3 += 1
+    # data1 = []
+    # for i in data:
+    #     data1.append(i['id'])
+    # print(len(data1))
+    # data2 = collections.Counter(data1)
+    # print(data2)
+
+
+    # test = ['NEWS_08156250','STORS_0232603','DUCANH__7063','DUCANH_71260','DUCANH_6810']
+    test = ['BOOK_1005503MANH2', 'BOOK_1005503MANH1', 'BOOK_1005503MANH0', 'BOOK_1005503']
+
+    for i in data:
+        if i['id'] in test:
+            # print(i['original'])
+            print(i)
+
 if __name__ == "__main__":
     f = None
     path = './data_test/'
-    tokenize_data = get_data_book(path + 'test_book.json')
-    noise_data = add_noise_sequen(tokenize_data, f)
-    data = shuffle(noise_data)
-    with open(path+'test_book1.json', 'w') as outfile:
-        json.dump(data, outfile, ensure_ascii=False)
+    # tokenize_data = get_data_book(path + 'test_book.json')
+    # noise_data = add_noise_sequen(tokenize_data, f)
+    # data = shuffle(noise_data)
+    # with open(path+'test_book1.json', 'w') as outfile:
+    #     json.dump(data, outfile, ensure_ascii=False)
+
+    random_numbers_sequence('./data_8_2/train_data.json')
+
+
+    # câu dưới trong dữ liệu tự động thêm dấu _ vào sau từ  Bhưới sau khi áp dung tokenize 
+    # a = 'Đúng như lời chủ tịch Đinh và già làng Bhling Chrlâng , qua những thôn làng ở các xã vùng biên này , giờ đây tôi đã gặp khá nhiều những thợ mộc địa phương , trong đó có rất nhiều thợ trẻ như thợ cả Jơrum Xia , 22 tuổi , là bí thư chi đoàn thôn Voòng ( xã Tr’hy ) , như Cơlâu Nhới , mới 17 tuổi - con của trưởng thôn Cơlâu Bhưới ...'
+
+    # a = ViTokenizer.tokenize('Oắt!')
+    # a = a.split(" ")
+    # print(a)
+
+    a = {'id': 'BOOK_0834713', 'raw': ['“', 'Có', 'lần', ',', 'trước', 'một', 'đám', 'đông', ',', 'ông', 'yêu_cầu', 'mọi', 'người', 'cởi', 'bỏ', 'âu_phục', 'để', 'ông', 'thiêu_hủy', '.'], 'original': ['“', 'Có', 'lần', ',', 'trước', 'một', 'đám', 'đông', ',', 'ông', 'yêu_cầu', 'mọi', 'người', 'cởi', 'bỏ', 'âu_phục', 'để', 'ông', 'thiêu_hủy', '.'], 'tid': 0}
+    b = {'id': 'BOOK_08347113', 'raw': ['“', 'Có', 'lần', ',', 'trước', 'một', 'đám', 'đông', ',', 'ông', 'yêu_cầu', 'mọi', 'người', 'cởi', 'bỏ', 'âu_phục', 'để', 'ông', 'thiêu_hủy', '.'], 'original': ['“', 'Có', 'lần', ',', 'trước', 'một', 'đám', 'đông', ',', 'ông', 'yêu_cầu', 'mọi', 'người', 'cởi', 'bỏ', 'âu_phục', 'để', 'ông', 'thiêu_hủy', '.'], 'tid': 0}
+
+    if a == b:
+        print('1')

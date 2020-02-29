@@ -47,8 +47,8 @@ def test_length(path, f1):
 
 
 if __name__ == '__main__':
-    # test_length(path,'train_data.json')
-    # test_length(path,'test_data.json')
+    test_length('./data_8_2/','train_data.json')
+    test_length('./data_8_2/','test_data.json')
     # get_length_data_json('data_.jsonl')
     # file_ducanh = ['./data_cuong/2016/train2016-refine.txt',
     #            './data_cuong/2018/train2018-refine.txt']

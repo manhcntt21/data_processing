@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from preprocessing import convert, split_token_json, add_noise_sequen, merge_data_noise, read_data_ducanh
 from preprocessing import get_length_data_json, get_length_data_add
-from utils import filter_punctuation
 import random
 import os
 import shutil
@@ -20,14 +19,18 @@ file_ducanh = ['./data_cuong/2016/train2016-refine.txt',
 # tạo dữ liệu 
 # path = './data_8_2/'
 # rate_train_test = 0.2 # train:test=8:2
+
 path = './data_9_1/'
 rate_train_test = 0.1 # train:test=9:1
 
 # xử lý riêng với dữ liệu của đức anh, không cần phải lọc theo item vì có một loại
 def custom_data(f):
+    print('- Dữ liệu bổ sung thêm')
     tokenize_data = read_data_ducanh(file_ducanh)
     train, test = train_test_split(tokenize_data, test_size=rate_train_test, random_state=3255)
+    print("\t- -----------------TRAIN-----------------------")
     noisy_data_train = add_noise_sequen(train, f)  # add_noise
+    print("\t- -----------------TEST-----------------------")
     noisy_data_test = add_noise_sequen(test, f)
     data_train = shuffle(noisy_data_train)  # shuffle data
     data_test = shuffle(noisy_data_test)  # shuffle data
@@ -54,18 +57,18 @@ if __name__ == '__main__':
     else:
         shutil.rmtree(path)           # Removes all the subdirectories!
         os.makedirs(path)
-    print(path)
+    print('# '+(path))
     length_a = get_length_data_json(file)
     length_b = get_length_data_add(file_ducanh)
-    print('Kích thước dữ liệu gốc của anh Minh {}'.format(length_a))
-    print('Kích thước dữ liệu gốc của Đức Anh {}'.format(length_b))
+    print('* **Kích thước dữ liệu gốc của anh Minh {}**'.format(length_a))
+    print('* **Kích thước dữ liệu gốc của Đức Anh {}**'.format(length_b))
     for i in range(len(data_labels)):
-        print('Dữ liệu {}'.format(data_labels[i]))
+        print('- Dữ liệu {}'.format(data_labels[i]))
         raw_data = convert(file, data_labels[i])
         element_train, element_test = train_test_split(raw_data, test_size=rate_train_test, random_state=3255)
-        print("-----------------TRAIN-----------------------")
+        print("\t- -----------------TRAIN-----------------------")
         element_train = precessing_element(element_train, f)
-        print("-----------------TEST-----------------------")
+        print("\t- -----------------TEST-----------------------")
         element_test = precessing_element(element_test, f)
         train += element_train
         test += element_test

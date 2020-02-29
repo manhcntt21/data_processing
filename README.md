@@ -2,189 +2,189 @@
 * **Kích thước dữ liệu gốc của anh Minh 17248**
 * **Kích thước dữ liệu gốc của Đức Anh 32443**
 - Dữ liệu BOOK
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 515
-        - thông kê các loại lỗi trong dữ liệu
-        - [167, 122, 95, 32, 47, 84, 78, 9, 55, 6, 30, 2, 164]
-        - tổng dữ liệu noise tạo ra 891
-        - tổng dữ liệu 1406
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 129
-        - thông kê các loại lỗi trong dữ liệu
-        - [35, 25, 29, 8, 12, 20, 13, 3, 9, 5, 8, 0, 42]
-        - tổng dữ liệu noise tạo ra 209
-        - tổng dữ liệu 338
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 515
+		- thông kê các loại lỗi trong dữ liệu
+		- [293, 227, 198, 57, 87, 142, 134, 28, 79, 15, 39, 5, 293]
+		- tổng dữ liệu noise tạo ra 602
+		- tổng dữ liệu 1117
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 129
+		- thông kê các loại lỗi trong dữ liệu
+		- [61, 47, 55, 13, 14, 40, 27, 4, 13, 1, 11, 2, 69]
+		- tổng dữ liệu noise tạo ra 128
+		- tổng dữ liệu 257
 - Dữ liệu CALS
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 703
-        - thông kê các loại lỗi trong dữ liệu
-        - [132, 107, 81, 39, 45, 57, 57, 12, 37, 5, 27, 1, 133]
-        - tổng dữ liệu noise tạo ra 733
-        - tổng dữ liệu 1436
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 176
-        - thông kê các loại lỗi trong dữ liệu
-        - [31, 21, 15, 7, 7, 10, 12, 0, 11, 0, 7, 0, 26]
-        - tổng dữ liệu noise tạo ra 147
-        - tổng dữ liệu 323
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 703
+		- thông kê các loại lỗi trong dữ liệu
+		- [238, 188, 134, 56, 66, 96, 113, 15, 64, 9, 36, 2, 243]
+		- tổng dữ liệu noise tạo ra 660
+		- tổng dữ liệu 1363
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 176
+		- thông kê các loại lỗi trong dữ liệu
+		- [41, 42, 49, 14, 16, 22, 22, 6, 14, 4, 14, 0, 46]
+		- tổng dữ liệu noise tạo ra 151
+		- tổng dữ liệu 327
 - Dữ liệu DIAL
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 3494
-        - thông kê các loại lỗi trong dữ liệu
-        - [782, 617, 501, 88, 245, 342, 302, 68, 221, 16, 120, 18, 843]
-        - tổng dữ liệu noise tạo ra 4163
-        - tổng dữ liệu 7657
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 874
-        - thông kê các loại lỗi trong dữ liệu
-        - [201, 154, 132, 21, 46, 100, 77, 15, 53, 3, 24, 2, 210]
-        - tổng dữ liệu noise tạo ra 1038
-        - tổng dữ liệu 1912
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 3494
+		- thông kê các loại lỗi trong dữ liệu
+		- [1594, 1243, 1071, 194, 483, 667, 643, 107, 444, 51, 220, 32, 1633]
+		- tổng dữ liệu noise tạo ra 3840
+		- tổng dữ liệu 7334
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 874
+		- thông kê các loại lỗi trong dữ liệu
+		- [419, 290, 256, 37, 118, 196, 151, 22, 107, 14, 50, 9, 428]
+		- tổng dữ liệu noise tạo ra 953
+		- tổng dữ liệu 1827
 - Dữ liệu NEWS
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 4634
-        - thông kê các loại lỗi trong dữ liệu
-        - [1372, 1108, 985, 312, 460, 587, 594, 79, 497, 68, 239, 30, 1409]
-        - tổng dữ liệu noise tạo ra 7740
-        - tổng dữ liệu 12374
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 1159
-        - thông kê các loại lỗi trong dữ liệu
-        - [378, 290, 242, 72, 115, 177, 140, 22, 111, 21, 56, 10, 373]
-        - tổng dữ liệu noise tạo ra 2007
-        - tổng dữ liệu 3166
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 4634
+		- thông kê các loại lỗi trong dữ liệu
+		- [2930, 2312, 2044, 628, 920, 1251, 1208, 182, 965, 126, 522, 48, 3105]
+		- tổng dữ liệu noise tạo ra 5658
+		- tổng dữ liệu 10292
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 1159
+		- thông kê các loại lỗi trong dữ liệu
+		- [792, 589, 498, 157, 250, 296, 291, 48, 252, 40, 118, 20, 819]
+		- tổng dữ liệu noise tạo ra 1438
+		- tổng dữ liệu 2597
 - Dữ liệu STORS
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 4400
-        - thông kê các loại lỗi trong dữ liệu
-        - [1366, 1058, 975, 193, 455, 579, 586, 98, 432, 47, 207, 27, 1428]
-        - tổng dữ liệu noise tạo ra 7451
-        - tổng dữ liệu 11851
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 1101
-        - thông kê các loại lỗi trong dữ liệu
-        - [338, 264, 234, 45, 88, 151, 136, 13, 85, 6, 46, 9, 334]
-        - tổng dữ liệu noise tạo ra 1749
-        - tổng dữ liệu 2850
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 4400
+		- thông kê các loại lỗi trong dữ liệu
+		- [2633, 2111, 1873, 363, 909, 1187, 1217, 165, 837, 91, 404, 47, 2823]
+		- tổng dữ liệu noise tạo ra 5328
+		- tổng dữ liệu 9728
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 1101
+		- thông kê các loại lỗi trong dữ liệu
+		- [673, 525, 471, 117, 222, 281, 257, 38, 200, 20, 81, 9, 680]
+		- tổng dữ liệu noise tạo ra 1315
+		- tổng dữ liệu 2416
 - Dữ liệu DIAL2
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 50
-        - thông kê các loại lỗi trong dữ liệu
-        - [9, 2, 3, 1, 2, 2, 2, 0, 3, 0, 1, 0, 4]
-        - tổng dữ liệu noise tạo ra 29
-        - tổng dữ liệu 79
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 13
-        - thông kê các loại lỗi trong dữ liệu
-        - [2, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
-        - tổng dữ liệu noise tạo ra 4
-        - tổng dữ liệu 17
-- Dữ liệu bổ sung thêm 
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 25954
-        - thông kê các loại lỗi trong dữ liệu
-        - [7550, 5890, 5327, 1488, 2420, 3207, 3367, 466, 2515, 307, 1249, 201, 7756]
-        - tổng dữ liệu noise tạo ra 41743
-        - tổng dữ liệu 67697
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 6489
-        - thông kê các loại lỗi trong dữ liệu
-        - [1888, 1510, 1309, 387, 602, 823, 801, 143, 666, 79, 335, 46, 1888]
-        - tổng dữ liệu noise tạo ra 10477
-        - tổng dữ liệu 16966
-## tổng dữ liệu của anh Minh và Đức Anh  128072
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 50
+		- thông kê các loại lỗi trong dữ liệu
+		- [7, 6, 10, 1, 1, 5, 1, 0, 0, 0, 2, 2, 8]
+		- tổng dữ liệu noise tạo ra 41
+		- tổng dữ liệu 91
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 13
+		- thông kê các loại lỗi trong dữ liệu
+		- [3, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0]
+		- tổng dữ liệu noise tạo ra 6
+		- tổng dữ liệu 19
+- Dữ liệu bổ sung thêm
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 25954
+		- thông kê các loại lỗi trong dữ liệu
+		- [14943, 12016, 10415, 2905, 5097, 6390, 6507, 929, 5185, 663, 2361, 368, 15684]
+		- tổng dữ liệu noise tạo ra 31015
+		- tổng dữ liệu 56969
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 6489
+		- thông kê các loại lỗi trong dữ liệu
+		- [3766, 2949, 2703, 688, 1226, 1594, 1641, 261, 1352, 173, 578, 78, 3778]
+		- tổng dữ liệu noise tạo ra 7802
+		- tổng dữ liệu 14291
+tổng dữ liệu của anh Minh và Đức Anh  108628
 # ./data_9_1/
 * **Kích thước dữ liệu gốc của anh Minh 17248**
 * **Kích thước dữ liệu gốc của Đức Anh 32443**
 - Dữ liệu BOOK
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 579
-        - thông kê các loại lỗi trong dữ liệu
-        - [187, 120, 117, 40, 53, 90, 82, 16, 62, 8, 20, 6, 182]
-        - tổng dữ liệu noise tạo ra 983
-        - tổng dữ liệu 1562
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 65
-        - thông kê các loại lỗi trong dữ liệu
-        - [12, 10, 16, 6, 6, 10, 8, 0, 5, 2, 6, 0, 15]
-        - tổng dữ liệu noise tạo ra 96
-        - tổng dữ liệu 161
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 579
+		- thông kê các loại lỗi trong dữ liệu
+		- [316, 242, 222, 64, 107, 167, 135, 19, 109, 11, 47, 5, 343]
+		- tổng dữ liệu noise tạo ra 657
+		- tổng dữ liệu 1236
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 65
+		- thông kê các loại lỗi trong dữ liệu
+		- [30, 22, 25, 7, 11, 13, 11, 0, 14, 1, 4, 1, 32]
+		- tổng dữ liệu noise tạo ra 68
+		- tổng dữ liệu 133
 - Dữ liệu CALS
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 791
-        - thông kê các loại lỗi trong dữ liệu
-        - [134, 100, 87, 32, 33, 62, 57, 11, 39, 10, 33, 1, 149]
-        - tổng dữ liệu noise tạo ra 748
-        - tổng dữ liệu 1539
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 88
-        - thông kê các loại lỗi trong dữ liệu
-        - [21, 17, 16, 2, 14, 4, 9, 0, 4, 2, 3, 0, 23]
-        - tổng dữ liệu noise tạo ra 115
-        - tổng dữ liệu 203
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 791
+		- thông kê các loại lỗi trong dữ liệu
+		- [263, 205, 191, 76, 62, 115, 107, 13, 70, 11, 53, 3, 264]
+		- tổng dữ liệu noise tạo ra 747
+		- tổng dữ liệu 1538
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 88
+		- thông kê các loại lỗi trong dữ liệu
+		- [37, 29, 22, 6, 9, 14, 16, 4, 8, 1, 4, 1, 44]
+		- tổng dữ liệu noise tạo ra 82
+		- tổng dữ liệu 170
 - Dữ liệu DIAL
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 3931
-        - thông kê các loại lỗi trong dữ liệu
-        - [905, 676, 618, 112, 280, 382, 372, 62, 243, 24, 130, 8, 948]
-        - tổng dữ liệu noise tạo ra 4760
-        - tổng dữ liệu 8691
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 437
-        - thông kê các loại lỗi trong dữ liệu
-        - [80, 81, 62, 10, 28, 52, 37, 5, 30, 0, 25, 0, 91]
-        - tổng dữ liệu noise tạo ra 501
-        - tổng dữ liệu 938
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 3931
+		- thông kê các loại lỗi trong dữ liệu
+		- [1724, 1359, 1267, 191, 567, 703, 714, 124, 498, 70, 267, 37, 1832]
+		- tổng dữ liệu noise tạo ra 4345
+		- tổng dữ liệu 8276
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 437
+		- thông kê các loại lỗi trong dữ liệu
+		- [178, 157, 151, 22, 61, 96, 97, 10, 68, 7, 20, 2, 187]
+		- tổng dữ liệu noise tạo ra 495
+		- tổng dữ liệu 932
 - Dữ liệu NEWS
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 5213
-        - thông kê các loại lỗi trong dữ liệu
-        - [1625, 1322, 1156, 360, 530, 742, 706, 108, 563, 67, 299, 43, 1724]
-        - tổng dữ liệu noise tạo ra 9245
-        - tổng dữ liệu 14458
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 580
-        - thông kê các loại lỗi trong dữ liệu
-        - [177, 138, 124, 42, 44, 83, 73, 11, 53, 7, 38, 2, 189]
-        - tổng dữ liệu noise tạo ra 981
-        - tổng dữ liệu 1561
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 5213
+		- thông kê các loại lỗi trong dữ liệu
+		- [3264, 2596, 2330, 737, 1097, 1419, 1450, 203, 1144, 149, 615, 76, 3399]
+		- tổng dữ liệu noise tạo ra 6371
+		- tổng dữ liệu 11584
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 580
+		- thông kê các loại lỗi trong dữ liệu
+		- [344, 274, 243, 63, 98, 158, 137, 10, 113, 10, 70, 7, 344]
+		- tổng dữ liệu noise tạo ra 701
+		- tổng dữ liệu 1281
 - Dữ liệu STORS
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 4950
-        - thông kê các loại lỗi trong dữ liệu
-        - [1490, 1129, 1015, 228, 467, 659, 647, 101, 476, 51, 225, 23, 1589]
-        - tổng dữ liệu noise tạo ra 8100
-        - tổng dữ liệu 13050
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 551
-        - thông kê các loại lỗi trong dữ liệu
-        - [143, 136, 100, 21, 49, 72, 69, 7, 47, 4, 16, 3, 140]
-        - tổng dữ liệu noise tạo ra 807
-        - tổng dữ liệu 1358
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 4950
+		- thông kê các loại lỗi trong dữ liệu
+		- [2882, 2226, 2084, 392, 946, 1252, 1280, 239, 919, 106, 424, 60, 3039]
+		- tổng dữ liệu noise tạo ra 5949
+		- tổng dữ liệu 10899
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 551
+		- thông kê các loại lỗi trong dữ liệu
+		- [327, 224, 235, 50, 94, 147, 143, 14, 99, 13, 52, 5, 326]
+		- tổng dữ liệu noise tạo ra 639
+		- tổng dữ liệu 1190
 - Dữ liệu DIAL2
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 56
-        - thông kê các loại lỗi trong dữ liệu
-        - [5, 3, 2, 1, 0, 1, 0, 0, 3, 0, 0, 0, 6]
-        - tổng dữ liệu noise tạo ra 21
-        - tổng dữ liệu 77
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 7
-        - thông kê các loại lỗi trong dữ liệu
-        - [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1]
-        - tổng dữ liệu noise tạo ra 2
-        - tổng dữ liệu 9
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 56
+		- thông kê các loại lỗi trong dữ liệu
+		- [7, 6, 4, 1, 0, 4, 2, 0, 3, 0, 1, 2, 4]
+		- tổng dữ liệu noise tạo ra 33
+		- tổng dữ liệu 89
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 7
+		- thông kê các loại lỗi trong dữ liệu
+		- [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+		- tổng dữ liệu noise tạo ra 2
+		- tổng dữ liệu 9
 - Dữ liệu bổ sung thêm
-    - -----------------TRAIN-----------------------
-        - lượng dữ liệu ban đầu 29198
-        - thông kê các loại lỗi trong dữ liệu
-        - [8547, 6791, 6071, 1622, 2858, 3699, 3836, 554, 2935, 383, 1409, 209, 8802]
-        - tổng dữ liệu noise tạo ra 47716
-        - tổng dữ liệu 76914
-    - -----------------TEST-----------------------
-        - lượng dữ liệu ban đầu 3245
-        - thông kê các loại lỗi trong dữ liệu
-        - [972, 756, 651, 170, 300, 414, 375, 63, 340, 47, 135, 18, 963]
-        - tổng dữ liệu noise tạo ra 5204
-        - tổng dữ liệu 8449
-## tổng dữ liệu của anh Minh và Đức Anh  128970
+	- -----------------TRAIN-----------------------
+		- lượng dữ liệu ban đầu 29198
+		- thông kê các loại lỗi trong dữ liệu
+		- [17024, 13534, 12160, 3303, 5648, 7511, 7468, 1104, 5861, 736, 2784, 415, 17614]
+		- tổng dữ liệu noise tạo ra 34985
+		- tổng dữ liệu 64183
+	- -----------------TEST-----------------------
+		- lượng dữ liệu ban đầu 3245
+		- thông kê các loại lỗi trong dữ liệu
+		- [1789, 1450, 1231, 371, 597, 825, 777, 110, 629, 84, 343, 40, 1947]
+		- tổng dữ liệu noise tạo ra 3900
+		- tổng dữ liệu 7145
+tổng dữ liệu của anh Minh và Đức Anh  108665
